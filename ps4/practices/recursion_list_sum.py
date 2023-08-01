@@ -23,7 +23,7 @@ def sum(lista):
 
     print(f'right going back is {right}')
     
-    return right
+    return left + right
 
 
 test_data = [1, 2, [3,4], [5,6]]
