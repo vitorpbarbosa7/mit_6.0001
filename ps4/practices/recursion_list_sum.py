@@ -3,6 +3,9 @@
 
 def sum(lista):
 
+    if isinstance(lista, int):
+        return lista
+
     if len(lista) == 1:
 
         # check if exists a list inside the list
@@ -22,9 +25,10 @@ def sum(lista):
     right = sum(right)
     left = sum(left)
 
-    print(f'right going back is {right}')
+    sum_each_level = left + right
+    print(f'Backtracking: left {left} + right {right} is {sum_each_level}')
     
-    return left + right
+    return sum_each_level
 
 
 test_data = [1, 2, [3,4], [5,6]]
