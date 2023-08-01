@@ -20,6 +20,7 @@ def sum(lista):
 
     # ligar a descida com a volta
     right = sum(right)
+    left = sum(left)
 
     print(f'right going back is {right}')
     
