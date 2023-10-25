@@ -4,11 +4,12 @@ def bubblesort(L):
 	
 	# it will continue until no more out of order values are encountered
 	# if it enters the loop, it means some of the values are out of order in that iteration yet
-	while not swap:
+
+	while not swap: # O(n) can pass here n times, if it needs to swap in all iterations
 		print(f'\n Current L: {L}\n')
 
 		swap = True
-		for j in range(1, len(L)):
+		for j in range(1, len(L)): # O(n) goes through the list n times
 			print(f'Intermediary L: {L}')
 			print(f"Comparing '{L[j-1]}' and '{L[j]}' ")
 			# if previous is bigger than the next, swap
