@@ -14,6 +14,9 @@ def suppress_print(suppress=True):
         return wrapper
     return decorator
 
+MAX_SIGNIFICANT_DIGITS_FLOAT = 10000
+UPPER_BOUND_BISECT_SEARCH = log2(MAX_SIGNIFICANT_DIGITS_FLOAT)
+
 @suppress_print(True)
 def solve_for_months(dream_house, 
                      annual_salary, 
@@ -26,20 +29,18 @@ def solve_for_months(dream_house,
 
     bisect_iterations = 0
 
-    MAX_SIGNIFICANT_DIGITS_FLOAT = 10000
-    UPPER_BOUND_BISECT_SEARCH = log2(MAX_SIGNIFICANT_DIGITS_FLOAT)
-
     low = 0
-    high = 1
-    pct_save_salary = ((low + high) / 2)
-
+    high = MAX_SIGNIFICANT_DIGITS_FLOAT
+    pct_save_salary = (low + high) // 2
+    pct_value = pct_save_salary/MAX_SIGNIFICANT_DIGITS_FLOAT
+                       
     bisect_search_amount_saved = 0
     while abs(bisect_search_amount_saved - A) > eps and bisect_iterations < UPPER_BOUND_BISECT_SEARCH:
 
         # this will change in the bisect search procedure
 
         monthly_salary = annual_salary/12
-        P = monthly_salary*pct_save_salary
+        P = monthly_salary*pct_value
         current_amount_saved = 0
 
         print('Needs to keep constant:')
@@ -49,7 +50,7 @@ def solve_for_months(dream_house,
 
         print('Must change:')
         print('P ', P)
-        print('pct_value ', pct_save_salary)
+        print('pct_value ', pct_value)
         print('current amount saved ', bisect_search_amount_saved)
         print('-----------\n')
 
@@ -62,7 +63,7 @@ def solve_for_months(dream_house,
                 
                 monthly_salary *= (1+semi_annual_raise)
                 
-            P = monthly_salary*pct_save_salary
+            P = monthly_salary*pct_value
 
             current_amount_saved = (current_amount_saved + P)*(1+(r/12))
 
@@ -79,14 +80,18 @@ def solve_for_months(dream_house,
             low = pct_save_salary
         
         # update save salary percentage
-        pct_save_salary = (low + high)/2
+        pct_save_salary = (low + high) // 2
+        pct_value = pct_save_salary/MAX_SIGNIFICANT_DIGITS_FLOAT
+        print('---------- updating values ---------------')
+        print(pct_save_salary)
+        print(pct_value)
 
         bisect_search_amount_saved = current_amount_saved
         print(f'Amount saved after {bisect_iterations} bisect_iterations is : {bisect_search_amount_saved}\n\n')
 
         #breakpoint()
 
-    return bisect_iterations, pct_save_salary, bisect_search_amount_saved
+    return bisect_iterations, pct_save_salary/MAX_SIGNIFICANT_DIGITS_FLOAT, bisect_search_amount_saved
 
 if __name__ == '__main__':
 
