@@ -15,6 +15,7 @@ in prefix were put there by comparing it to the all other elements, which makes 
 
 '''
 
+# O(n*n)
 def selectionsort(L):
 
 	suffixSt = 0
@@ -24,7 +25,7 @@ def selectionsort(L):
 		print(f'\nPrefix list: {L[0:suffixSt]}')
 		print(f'Suffix list: {L[suffixSt:]}\n')
 
-		for i in range(suffixSt, len(L)): 
+		for i in range(suffixSt, len(L)): # walk down the remaining of the list, even if gets shorter, it is still O(n) 
 			
 			# if the element is smaller than the element at suffixSt, then swap them
 			# since the smaller should go to the suffixSt position
