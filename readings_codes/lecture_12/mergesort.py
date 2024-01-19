@@ -77,10 +77,12 @@ def mergesort(L, side:str):
 	print(f'\nside: {side}')
 	print(f'List: {L}')
 
+	# Base Case
 	if len(L) < 2:
 
 		return L[:]
-
+	
+	# Divide
 	else:
 
 		mid = len(L)//2
@@ -93,26 +95,12 @@ def mergesort(L, side:str):
 		left = mergesort(left, 'left')
 		right = mergesort(right, 'right')
 	
+	# Conquer
 		return merge(left, right, superior_side=side)
 		
-		
-
-	
-		
-
-
 if __name__ == '__main__':
 
 	L = [3,2,1,4,6,5]
 
 	mergesort(L, 'start')
-
-
-
-
-
-
-
-
-
 
