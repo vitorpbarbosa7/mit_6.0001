@@ -11,11 +11,10 @@ def fib_efficient(n, d):
         print(d)
         return ans
     
-
-# Base cases in the hash table
-d = {0:1, 1:1}
-n = 7
-
-fib_efficient(n, d)
+if __name__ == '__main__':
+    # Base cases in the hash table
+    d = {0:1, 1:1}
+    n = 7
+    fib_efficient(n, d)
 
 
