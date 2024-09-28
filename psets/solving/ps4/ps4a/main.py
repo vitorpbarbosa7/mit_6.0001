@@ -1,4 +1,4 @@
-def exec(left, right):
+def executor(left, right):
 
     permutations = []
 
@@ -16,7 +16,7 @@ def exec(left, right):
         
         permutations.append(word)
 
-    print(permutations)
+    # print(permutations)
 
     return permutations
 
@@ -43,7 +43,7 @@ def permutation(sequence):
         # pegando todas permutacoes que vieram da direita, quando volta
         for single_right_permutation in right_permutations:
 
-            new_permutations = exec(left, single_right_permutation)
+            new_permutations = executor(left, single_right_permutation)
 
             for new_permutation in new_permutations:
 
@@ -53,6 +53,7 @@ def permutation(sequence):
         return permutations
     
 
-sequence = 'abcd'
-all_permutations = permutation(sequence)
-print(all_permutations)
+if __name__ == '__main__':
+    sequence = 'abc'
+    all_permutations = permutation(sequence)
+    print(all_permutations)
