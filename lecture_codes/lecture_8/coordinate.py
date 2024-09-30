@@ -9,6 +9,9 @@ class Coordinate(object):
         y_diff_sq = (self.y - other.y)**2
 
         return (x_diff_sq + y_diff_sq)**0.5
+
+    def __str__(self):
+        return "<"+ str(self.x) + ","+ str(self.y) + ">"
     
 
 c = Coordinate(3,4)
@@ -19,3 +22,15 @@ print(c.distance(zero))
 
 # pass both instances to the class
 print(Coordinate.distance(c,zero))
+
+# print representation
+print(c)
+
+# type
+print(type(c))
+
+print(Coordinate)
+
+print(type(Coordinate))
+
+print(isinstance(c, Coordinate))
