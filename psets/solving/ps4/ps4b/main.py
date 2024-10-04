@@ -124,11 +124,7 @@ class Message(object):
         upper = string.ascii_uppercase
 
         lower_shifted = rot_list(lower, shift)
-        print(lower)
-        print(lower_shifted)
         upper_shifted = rot_list(upper, shift)
-        print(upper)
-        print(upper_shifted)
 
         orig = lower + upper
         shifted = lower_shifted + upper_shifted
@@ -149,7 +145,19 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        # Create a translation table using str.maketrans()
+
+        replace_dict = self.build_shift_dict(shift)
+
+        new_message = []
+        for char in self.message_text:
+            if char in replace_dict:
+                new_char = replace_dict[char]
+                new_message.append(new_char)
+
+        new_message = ''.join(new_message)
+
+        return new_message
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -251,10 +259,11 @@ if __name__ == '__main__':
 
     # Debug cases
     
-    message = Message('a')
+    message = Message('abcde')
 
-    res = message.build_shift_dict(3)
-    print(res)
+    # res = message.build_shift_dict(1)
+    message_shifted = message.apply_shift(1)
+    print(message_shifted)
 
 
 
