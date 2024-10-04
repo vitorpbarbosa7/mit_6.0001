@@ -2,6 +2,7 @@
 # Name: <your name here>
 # Collaborators:
 # Time Spent: x:xx
+import unittest
 
 
 def executor(left, right):
@@ -80,6 +81,24 @@ def get_permutations(sequence):
         # onde eu sempre tenho dificuldade, de voltar
         return permutations
 
+class TestGetPermutations(unittest.TestCase):
+
+    def test_case_1(self):
+        example_input = 'abc'
+        expected_output = set(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
+        self.assertEqual(set(get_permutations(example_input)), expected_output)
+
+    def test_case_2(self):
+        # Example Test Case 2
+        example_input = 'ab'
+        expected_output = set(['ab', 'ba'])
+        self.assertEqual(set(get_permutations(example_input)), expected_output)
+
+    def test_case_3(self):
+        # Example Test Case 3
+        example_input = 'a'
+        expected_output = set(['a'])
+        self.assertEqual(set(get_permutations(example_input)), expected_output)
 
 
 if __name__ == '__main__':
@@ -93,12 +112,5 @@ if __name__ == '__main__':
 #    to be three characters or fewer as you will have n! permutations for a 
 #    sequence of length n)
 
-    #TODO Implement as UnitTest in python instead of Assert
-
-    # Example Test Case 1 
-    example_input = 'abc'
-    expected_output = set(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
-    out = get_permutations(example_input)
-    assert(set(out)) == expected_output
-
+    unittest.main()
 
