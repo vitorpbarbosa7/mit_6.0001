@@ -6,9 +6,22 @@ u = string.ascii_uppercase
 print(l)
 print(u)
 
-i = 1
-new_list = []
-_len = 26
-for ch in l:
-    new_list.append(_len - i + 1)
+def rot_list(lst, shift):
 
+    shift = shift % len(lst)
+
+    for_upper = lst[:]
+    for_lower = lst[:]
+    # the final part at the beginning
+    lower = for_lower[-shift:]
+    
+    till = len(lst) - shift
+    # the initial part at the end
+    upper = for_upper[:till]
+
+    return lower + upper
+
+
+print(rot_list(l, 1))
+print(rot_list(l, 2))
+print(rot_list(l, 3))

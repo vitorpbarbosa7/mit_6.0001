@@ -55,6 +55,21 @@ def get_story_string():
     f.close()
     return story
 
+def rot_list(lst, shift):
+
+    shift = shift % len(lst)
+
+    for_upper = lst[:]
+    for_lower = lst[:]
+    # the final part at the beginning
+    lower = for_lower[-shift:]
+    
+    till = len(lst) - shift
+    # the initial part at the end
+    upper = for_upper[:till]
+
+    return lower + upper
+
 ### END HELPER CODE ###
 
 WORDLIST_FILENAME = 'words.txt'
@@ -70,15 +85,17 @@ class Message(object):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        self.message_text = text
+        self.valid_words = load_words(WORDLIST_FILENAME)
 
+    # getter method
     def get_message_text(self):
         '''
         Used to safely access self.message_text outside of the class
         
         Returns: self.message_text
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text
 
     def get_valid_words(self):
         '''
@@ -87,7 +104,7 @@ class Message(object):
         
         Returns: a COPY of self.valid_words
         '''
-        pass #delete this line and replace with your code here
+        return self.valid_words[:]
 
     def build_shift_dict(self, shift):
         '''
@@ -103,7 +120,22 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        pass #delete this line and replace with your code here
+        lower = string.ascii_lowercase
+        upper = string.ascii_uppercase
+
+        lower_shifted = rot_list(lower, shift)
+        print(lower)
+        print(lower_shifted)
+        upper_shifted = rot_list(upper, shift)
+        print(upper)
+        print(upper_shifted)
+
+        orig = lower + upper
+        shifted = lower_shifted + upper_shifted
+
+        _dict = dict(zip(orig, shifted))
+
+        return _dict
 
     def apply_shift(self, shift):
         '''
@@ -217,8 +249,17 @@ if __name__ == '__main__':
 #    print('Expected Output:', (24, 'hello'))
 #    print('Actual Output:', ciphertext.decrypt_message())
 
+    # Debug cases
+    
+    message = Message('a')
+
+    res = message.build_shift_dict(3)
+    print(res)
+
+
+
+
     #TODO: WRITE YOUR TEST CASES HERE
 
     #TODO: best shift value and unencrypted story 
     
-    pass #delete this line and replace with your code here
