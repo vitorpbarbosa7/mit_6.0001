@@ -264,18 +264,32 @@ class CiphertextMessage(Message):
         and the decrypted message text using that shift value
         '''
         # single try shift and count
-        try_shift = 1
-        reverse_shift = 26 - try_shift
         message_text = self.get_message_text()
-        for word in message_text.split(' '):
-            reverse_word = self.apply_shift(reverse_shift)
 
-        reverse_message = self.apply_shift(reverse_shift)
-        # now count how many of the words are in valid words
-        cont = 0
-        for word in reverse_message.split(' '):
-            cont += is_word(self.valid_words, word)
-        print(cont)
+        attempts_counts = {}
+        for try_shift in range(0, 26+1):
+            reverse_shift = 26 - try_shift
+            for word in message_text.split(' '):
+                reverse_word = self.apply_shift(reverse_shift)
+
+            reverse_message = self.apply_shift(reverse_shift)
+            # now count how many of the words are in valid words
+            cont = 0
+            for word in reverse_message.split(' '):
+                cont += is_word(self.valid_words, word)
+            
+            attempts_counts[cont] = reverse_message
+
+        max_found = max(attempts_counts)
+        print(max_found)
+
+        value = attempts_counts[max_found]
+        print(value)
+
+        res = (max_found, value) 
+        return res
+        
+
 
 
 
