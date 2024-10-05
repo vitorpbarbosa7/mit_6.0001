@@ -18,14 +18,14 @@ def load_words(file_name):
     take a while to finish.
     '''
     
-    print("Loading word list from file...")
+#    print("Loading word list from file...")
     # inFile: file
     inFile = open(file_name, 'r')
     # wordlist: list of strings
     wordlist = []
     for line in inFile:
         wordlist.extend([word.lower() for word in line.split(' ')])
-    print("  ", len(wordlist), "words loaded.")
+#    print("  ", len(wordlist), "words loaded.")
     return wordlist
 
 def is_word(word_list, word):
@@ -180,7 +180,7 @@ class EncryptedSubMessage(SubMessage):
 
             enc_dict = self.build_transpose_dict(single_perm)
             reverse_message = self.apply_transpose(enc_dict)
-            print('Decrypted Message: ', reverse_message)
+#            print('Decrypted Message: ', reverse_message)
 
             attempts_counts = {}
             cont = 0
@@ -194,7 +194,6 @@ class EncryptedSubMessage(SubMessage):
         print(max_found)
 
         value = attempts_counts[max_found]
-        print(value)
 
         res = value
         return res
@@ -216,10 +215,9 @@ if __name__ == '__main__':
     text = "Programming is not just about code; it's about finding elegant solutions to complex problems through thoughtful design and logic"
     message = SubMessage(text)
 
-    permutation = 'aiedc'
+    permutation = 'eaoiu'
     enc_dict = message.build_transpose_dict(permutation)
-    print("Original message:", message.get_message_text(), "Permutation:", permutation)
-    print("Expected encryption:", "Hallu Wurld!")
-    print("Actual encryption:", message.apply_transpose(enc_dict))
+    print("\nOriginal message:", message.get_message_text(), "Permutation:", permutation)
+    print("\nActual encryption:", message.apply_transpose(enc_dict))
     enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
-    print("Decrypted message:", enc_message.decrypt_message())
+    print("\nDecrypted message:", enc_message.decrypt_message())
