@@ -16,7 +16,7 @@ def load_words(file_name):
     Depending on the size of the word list, this function may
     take a while to finish.
     '''
-    print("Loading word list from file...")
+#    print("Loading word list from file...")
     # inFile: file
     inFile = open(file_name, 'r')
     # wordlist: list of strings
@@ -149,10 +149,8 @@ class Message(object):
 
         replace_dict = self.build_shift_dict(shift)
 
-        new_message = []
         new_words = []
         for word in self.message_text.split(' '):
-            print(word)
             new_chars = []
             for char in word:
                 if char in replace_dict:
@@ -273,9 +271,11 @@ class CiphertextMessage(Message):
             reverse_word = self.apply_shift(reverse_shift)
 
         reverse_message = self.apply_shift(reverse_shift)
-        print(reverse_message)
-#        for word in reverse_message:
-#            print(wor
+        # now count how many of the words are in valid words
+        cont = 0
+        for word in reverse_message.split(' '):
+            cont += is_word(self.valid_words, word)
+        print(cont)
 
 
 
