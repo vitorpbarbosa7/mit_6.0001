@@ -176,22 +176,20 @@ class EncryptedSubMessage(SubMessage):
         '''
         perm_lower_collection = get_permutations(VOWELS_LOWER)
 
+        attempts_counts = {}
         for single_perm in perm_lower_collection:
 
             enc_dict = self.build_transpose_dict(single_perm)
             reverse_message = self.apply_transpose(enc_dict)
-#            print('Decrypted Message: ', reverse_message)
 
-            attempts_counts = {}
             cont = 0
             for word in reverse_message.split(' '):
                 cont += is_word(self.valid_words, word)
             
-                attempts_counts[cont] = reverse_message
+            attempts_counts[cont] = reverse_message
 
 
         max_found = max(attempts_counts)
-        print(max_found)
 
         value = attempts_counts[max_found]
 
@@ -218,6 +216,11 @@ if __name__ == '__main__':
     permutation = 'eaoiu'
     enc_dict = message.build_transpose_dict(permutation)
     print("\nOriginal message:", message.get_message_text(), "Permutation:", permutation)
-    print("\nActual encryption:", message.apply_transpose(enc_dict))
-    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
-    print("\nDecrypted message:", enc_message.decrypt_message())
+
+    encrypted_message = message.apply_transpose(enc_dict)
+    print("\nActual encryption:", encrypted_message)
+    
+    # Now let's decrypt this again by tring the permutations
+    enc_message = EncryptedSubMessage(encrypted_message)
+    decrypt_action_message = enc_message.decrypt_message()
+    print("\nDecrypted message:", decrypt_action_message)
