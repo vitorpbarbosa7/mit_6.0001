@@ -23,7 +23,7 @@ def load_words(file_name):
     wordlist = []
     for line in inFile:
         wordlist.extend([word.lower() for word in line.split(' ')])
-    print("  ", len(wordlist), "words loaded.")
+#    print("  ", len(wordlist), "words loaded.")
     return wordlist
 
 def is_word(word_list, word):
@@ -181,7 +181,7 @@ class PlaintextMessage(Message):
         super().__init__(text)
         self.shift = shift
         self.encryption_dict = self.build_shift_dict(shift)
-        self.message_text_encryped = self.apply_shift(shift)
+        self.message_text_encrypted = self.apply_shift(shift)
         pass #delete this line and replace with your code here
 
     def get_shift(self):
@@ -198,7 +198,7 @@ class PlaintextMessage(Message):
         
         Returns: a COPY of self.encryption_dict
         '''
-        return self.encryption_dict
+        return self.encryption_dict.copy()
 
     def get_message_text_encrypted(self):
         '''
@@ -206,7 +206,8 @@ class PlaintextMessage(Message):
         
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+
+        return self.message_text_encrypted
 
     def change_shift(self, shift):
         '''
@@ -218,7 +219,14 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        # will have a new shift
+        self.shift = shift
+        # what attributes are influenced by shift?
+        # new dictionary
+        self.encryption_dict = self.build_shift_dict(shift)
+        # apply the new shift
+        self.message_text_encrypted = self.apply_shift(shift)
+
 
 
 class CiphertextMessage(Message):
