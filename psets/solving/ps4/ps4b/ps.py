@@ -150,12 +150,18 @@ class Message(object):
         replace_dict = self.build_shift_dict(shift)
 
         new_message = []
-        for char in self.message_text:
-            if char in replace_dict:
-                new_char = replace_dict[char]
-                new_message.append(new_char)
+        new_words = []
+        for word in self.message_text.split(' '):
+            print(word)
+            new_chars = []
+            for char in word:
+                if char in replace_dict:
+                    new_char = replace_dict[char]
+                    new_chars.append(new_char)
+            single_word = ''.join(new_chars)
+            new_words.append(single_word)
 
-        new_message = ''.join(new_message)
+        new_message = ' '.join(new_words)
 
         return new_message
 

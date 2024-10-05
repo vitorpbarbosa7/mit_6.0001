@@ -1,7 +1,7 @@
 from ps import PlaintextMessage
 
-
-plain = PlaintextMessage('abcde', 1)
+text = 'turing complete'
+plain = PlaintextMessage(text, 1)
 
 print(plain.get_shift())
 print(plain.get_message_text())
