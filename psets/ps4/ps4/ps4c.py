@@ -176,17 +176,18 @@ class EncryptedSubMessage(SubMessage):
         '''
         perm_lower_collection = get_permutations(VOWELS_LOWER)
 
-        single_perm = perm_lower_collection[0]
-        enc_dict = self.build_transpose_dict(single_perm)
-        reverse_message = self.apply_transpose(enc_dict)
-        print('Decrypted Message: ', reverse_message)
+        for single_perm in perm_lower_collection:
 
-        attempts_counts = {}
-        cont = 0
-        for word in reverse_message.split(' '):
-            cont += is_word(self.valid_words, word)
-        
-            attempts_counts[cont] = reverse_message
+            enc_dict = self.build_transpose_dict(single_perm)
+            reverse_message = self.apply_transpose(enc_dict)
+            print('Decrypted Message: ', reverse_message)
+
+            attempts_counts = {}
+            cont = 0
+            for word in reverse_message.split(' '):
+                cont += is_word(self.valid_words, word)
+            
+                attempts_counts[cont] = reverse_message
 
 
         max_found = max(attempts_counts)
@@ -212,9 +213,13 @@ if __name__ == '__main__':
     # print("Decrypted message:", enc_message.decrypt_message())
      
     #TODO: WRITE YOUR TEST CASES HERE
-    orig_perm = 'aiedc'
+    text = "Programming is not just about code; it's about finding elegant solutions to complex problems through thoughtful design and logic"
+    message = SubMessage(text)
 
-    decrypted_message_to_decrypt = 'Terang Complutu'
-
-    decrypt = EncryptedSubMessage(decrypted_message_to_decrypt)
-    decrypted = decrypt.decrypt_message()
+    permutation = 'aiedc'
+    enc_dict = message.build_transpose_dict(permutation)
+    print("Original message:", message.get_message_text(), "Permutation:", permutation)
+    print("Expected encryption:", "Hallu Wurld!")
+    print("Actual encryption:", message.apply_transpose(enc_dict))
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    print("Decrypted message:", enc_message.decrypt_message())
