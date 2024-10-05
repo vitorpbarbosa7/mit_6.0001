@@ -175,6 +175,13 @@ class PlaintextMessage(Message):
             self.message_text_encrypted (string, created using shift)
 
         '''
+        # for message_text and valid_words
+        # receiveing text will create message_text and valid_words
+        # because the super class is being called, using an attribute of the subclass
+        super().__init__(text)
+        self.shift = shift
+        self.encryption_dict = self.build_shift_dict(shift)
+        self.message_text_encryped = self.apply_shift(shift)
         pass #delete this line and replace with your code here
 
     def get_shift(self):
@@ -262,10 +269,8 @@ if __name__ == '__main__':
     message = Message('abcde')
 
     # res = message.build_shift_dict(1)
-    message_shifted = message.apply_shift(1)
-    print(message_shifted)
-
-
+#    message_shifted = message.apply_shift(1)
+#    print(message_shifted)
 
 
     #TODO: WRITE YOUR TEST CASES HERE
