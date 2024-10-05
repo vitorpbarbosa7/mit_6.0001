@@ -240,7 +240,8 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        super().__init__(text)
+
 
     def decrypt_message(self):
         '''
@@ -258,7 +259,20 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        # single try shift and count
+        try_shift = 1
+        reverse_shift = 26 - try_shift
+        message_text = self.get_message_text()
+        for word in message_text.split(' '):
+            reverse_word = self.apply_shift(reverse_shift)
+
+        reverse_message = self.apply_shift(reverse_shift)
+        print(reverse_message)
+#        for word in reverse_message:
+#            print(wor
+
+
+
 
 if __name__ == '__main__':
 
