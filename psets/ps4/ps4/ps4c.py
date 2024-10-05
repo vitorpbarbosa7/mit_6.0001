@@ -143,8 +143,6 @@ class SubMessage(object):
 
         return new_message
         
-        pass #delete this line and replace with your code here
-        
 class EncryptedSubMessage(SubMessage):
     def __init__(self, text):
         '''
@@ -188,7 +186,7 @@ if __name__ == '__main__':
     print("Original message:", message.get_message_text(), "Permutation:", permutation)
     print("Expected encryption:", "Hallu Wurld!")
     print("Actual encryption:", message.apply_transpose(enc_dict))
-    # enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
+    enc_message = EncryptedSubMessage(message.apply_transpose(enc_dict))
     # print("Decrypted message:", enc_message.decrypt_message())
      
     #TODO: WRITE YOUR TEST CASES HERE
